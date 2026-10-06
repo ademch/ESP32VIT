@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\HTML">
+      <UniqueIdentifier>{1bb53eb6-db68-46c3-8584-3a909543a540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EXTERNAL">
+      <UniqueIdentifier>{9293f0d0-8316-4f86-88e0-56c6db73a46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EXTERNAL\FS">
+      <UniqueIdentifier>{f8f1dd64-e5aa-4194-afe4-ddf5a4812813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EXTERNAL\HTTP_SERVER">
+      <UniqueIdentifier>{f1666e92-6d7d-4003-859c-769cde4f9e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EXTERNAL\Wire">
+      <UniqueIdentifier>{11c1a172-45ec-4de2-bfd0-f322b9af0c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EXTERNAL\SD">
+      <UniqueIdentifier>{ead0a889-b848-4f8b-b619-dbcb7e148c5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ESP32VIT.ino" />
+    <ClCompile Include="board_config.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="indexHTML.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pinsConfig.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\FS\src\FS.cpp">
+      <Filter>Header Files\EXTERNAL\FS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\SPIFFS\src\SPIFFS.cpp">
+      <Filter>Header Files\EXTERNAL\FS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\Wire\src\Wire.cpp">
+      <Filter>Header Files\EXTERNAL\Wire</Filter>
+    </ClCompile>
+    <ClCompile Include="DS3231.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADS1115.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\SD\src\SD.cpp">
+      <Filter>Header Files\EXTERNAL\SD</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.ESP32VIT.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\FS\src\FS.h">
+      <Filter>Header Files\EXTERNAL\FS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\SPIFFS\src\SPIFFS.h">
+      <Filter>Header Files\EXTERNAL\FS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\tools\esp32-arduino-libs\idf-release_v5.5-b66b5448-v1\esp32\include\esp_http_server\include\esp_http_server.h">
+      <Filter>Header Files\EXTERNAL\HTTP_SERVER</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\Wire\src\Wire.h">
+      <Filter>Header Files\EXTERNAL\Wire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\WiFi\src\WiFi.h">
+      <Filter>Header Files\EXTERNAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\tools\esp32-arduino-libs\idf-release_v5.5-b66b5448-v1\esp32\include\soc\esp32\include\soc\soc_caps.h">
+      <Filter>Header Files\EXTERNAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\tools\esp32-arduino-libs\idf-release_v5.5-b66b5448-v1\esp32\include\esp_timer\include\esp_timer.h">
+      <Filter>Header Files\EXTERNAL</Filter>
+    </ClInclude>
+    <ClInclude Include="DS3231.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADS1115.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\SD\src\SD.h">
+      <Filter>Header Files\EXTERNAL\SD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.0\libraries\SD\src\sd_defines.h">
+      <Filter>Header Files\EXTERNAL\SD</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="!proto.html">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="calibrate.js">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="firmware.js">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="save.js">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="script.js">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="scriptCaptureAndStream.js">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+    <None Include="style.css">
+      <Filter>Source Files\HTML</Filter>
+    </None>
+  </ItemGroup>
+</Project>

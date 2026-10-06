@@ -1,0 +1,122 @@
+﻿R"(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vacuum Monitor</title>
+
+    <style>
+        @font-face {
+            font-family: "Orbitron";
+            src: url("Orbitron.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-color: #FFEF00; /* canary yellow */
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .display-section {
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .value {
+            font-family: "Orbitron", sans-serif;
+            font-size: 8vw;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .control-section {
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .update-section {
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            cursor: pointer;
+            border: 2px solid black;
+            border-radius: 8px;
+            background-color: white;
+        }
+
+            button:active {
+                transform: scale(0.97);
+            }
+    </style>
+</head>
+
+<body>
+
+    <section class="display-section">
+        <div class="value" id="vacuum">Vacuum</div>
+        <div class="value" id="voltage">Voltage</div>
+    </section>
+
+    <section class="control-section">
+        <button id="startButton">Start Monitoring</button>
+        <button id="stopButton">Stop Monitoring</button>
+    </section>
+
+    <section class="update-section">
+        <button id="updateButton">Update Server</button>
+    </section>
+
+    <script>
+    const startButton = document.getElementById("startButton");
+    const stopButton = document.getElementById("stopButton");
+    const updateButton = document.getElementById("updateButton");
+
+    startButton.addEventListener("click", () => {
+        console.log("Start Monitoring");
+    });
+
+    stopButton.addEventListener("click", () => {
+        console.log("Stop Monitoring");
+    });
+
+    updateButton.addEventListener("click", () => {
+        console.log("Update Server");
+    });
+    </script>
+
+    <script src="script.js"></script>
+    <script src="firmware.js"></script>
+    <script src="scriptCaptureAndStream.js"></script>
+    <script src="save.js"></script>
+    <script src="calibrate.js"></script>
+
+    </body>
+</html>
+)"

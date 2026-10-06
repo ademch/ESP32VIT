@@ -1,0 +1,2178 @@
+﻿R"(<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>ThermoVision v1.0 (KPI 2025)</title>
+        <style>
+
+
+body {
+    font-family: Arial,Helvetica,sans-serif;
+    background: #181818; /* Page background color */
+    color: #1FEFEF; /* Font color */
+    font-size: 14px
+}
+
+h2 {
+    font-size: 18px
+}
+
+section.flexContainer {
+    display: flex;
+}
+
+#menu, section.flexContainer {
+    flex-direction: column
+}
+
+#menu {
+    display: none;
+    flex-wrap: nowrap;
+    min-width: 340px;
+    background: #363636;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: -10px;
+    margin-right: 10px;
+}
+
+#GeneralSettings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    height: 90vh;
+}
+
+figure {
+    padding: 0px;
+    margin: 0;
+    flex: 1;
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+    -webkit-margin-start: 0;
+    margin-inline-start: 0;
+    -webkit-margin-end: 0;
+    margin-inline-end: 0
+}
+
+    figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+
+/* set CSS at-rule*/
+@media (min-width: 800px) and (orientation:landscape) {
+    #GeneralSettings {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch
+    }
+
+    figure img {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100vh - 40px);
+        width: 100%;
+        height: auto
+    }
+
+    figure {
+        flex: 1;
+        padding: 0 0 0 0px;
+        margin: 0;
+        -webkit-margin-before: 0;
+        margin-block-start: 0;
+        -webkit-margin-after: 0;
+        margin-block-end: 0;
+        -webkit-margin-start: 0;
+        margin-inline-start: 0;
+        -webkit-margin-end: 0;
+        margin-inline-end: 0
+    }
+}
+
+section#CaptureButtons {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+/* Menu header*/
+#nav-toggle {
+    cursor: pointer;
+    display: block;
+}
+
+#nav-toggle-cb {
+    outline: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+    #nav-toggle-cb:checked + #menu {
+        display: flex
+    }
+
+.input-group {
+    display: flex;
+    flex-wrap: nowrap;
+    line-height: 20px;
+    margin: 5px 0;
+    align-items: center;
+}
+
+    .input-group > label {
+        display: inline-block;
+        padding-right: 10px;
+        min-width: 50%
+    }
+
+    .input-group > progress {
+        display: inline-block;
+        padding-right: 10px;
+        min-width: 50%;
+        height: 12px;
+        border-radius: 0;
+    }
+
+    .input-group input, .input-group select {
+        flex-grow: 1
+    }
+
+.range-max, .range-min {
+    display: inline-block;
+    padding: 0 5px
+}
+
+button, .button {
+    display: block;
+    margin: 5px;
+    padding: 0 12px;
+    border: 0;
+    line-height: 22px;
+    cursor: pointer;
+    color: #fff;
+    background: #ff3034;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: 0
+}
+
+.saveButton {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 4px;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: left;
+}
+
+button:hover {
+    background: #ff494d
+}
+
+button:active {
+    background: #f21c21
+}
+
+button.disabled {
+    cursor: default;
+    background: #a0a0a0
+}
+
+/* Slider */
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 18px;
+    background: #202020;
+    cursor: pointer;
+    margin: 0
+}
+
+input[type=range]:focus {
+    outline: 0
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #EFEFEF;
+    border-radius: 0;
+    border: 0 solid #EFEFEF
+}
+
+input[type=range]::-webkit-slider-thumb {
+    border: 1px solid rgba(0,0,30,0);
+    height: 16px;
+    width: 16px;
+    border-radius: 50px;
+    background: #ff3034;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #EFEFEF
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: #EFEFEF;
+    border-radius: 0;
+    border: 0 solid #EFEFEF
+}
+
+input[type=range]::-moz-range-thumb {
+    border: 1px solid rgba(0,0,30,0);
+    height: 16px;
+    width: 16px;
+    border-radius: 50px;
+    background: #ff3034;
+    cursor: pointer
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: 0 0;
+    border-color: transparent;
+    color: transparent
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #EFEFEF;
+    border: 0 solid #EFEFEF;
+    border-radius: 0
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #EFEFEF;
+    border: 0 solid #EFEFEF;
+    border-radius: 0
+}
+
+input[type=range]::-ms-thumb {
+    border: 1px solid rgba(0,0,30,0);
+    height: 16px;
+    width: 16px;
+    border-radius: 50px;
+    background: #ff3034;
+    cursor: pointer;
+    height: 2px
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #EFEFEF
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #202020
+}
+
+.switch {
+    display: block;
+    position: relative;
+    line-height: 22px;
+    font-size: 16px;
+    height: 22px
+}
+
+    .switch input {
+        outline: 0;
+        opacity: 0;
+        width: 0;
+        height: 0
+    }
+
+.slider {
+    width: 50px;
+    height: 18px;
+    border-radius: 22px;
+    cursor: pointer;
+    background-color: grey
+}
+
+    .slider, .slider:before {
+        display: inline-block;
+        transition: .4s
+    }
+
+        .slider:before {
+            position: relative;
+            content: "";
+            border-radius: 50%;
+            height: 13px;
+            width: 13px;
+            left: 4px;
+            top: 2px;
+            background-color: #fff
+        }
+
+input:checked + .slider {
+    background-color: #ff3034
+}
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        transform: translateX(26px)
+    }
+
+select {
+    border: 1px solid #363636;
+    font-size: 14px;
+    height: 20px;
+    outline: 0;
+    border-radius: 5px
+}
+
+/* div container that holds image related elements*/
+.image-container {
+    position: relative;
+    min-width: 160px;
+}
+
+.hidden {
+    display: none
+}
+
+input[type=text] {
+    border: 1px solid #363636;
+    font-size: 14px;
+    height: 20px;
+    margin: 1px;
+    outline: 0;
+    border-radius: 1px
+}
+
+.inline-button {
+    line-height: 16px;
+    margin: 2px;
+    padding: 1px 4px 2px 4px;
+    min-width: 80px;
+}
+
+label.toggle-section-label {
+    cursor: pointer;
+    display: block;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+input.toggle-section-button {
+    outline: 0;
+    opacity: 0;
+    width: 0;
+    height: 0
+}
+
+    input.toggle-section-button:checked + section.toggle-section {
+        display: none
+    }
+
+.group-grey-box {
+    background-color: #202020; /* light grey */
+    padding: 10px;
+    border-radius: 6px; /* rounded corners */
+    margin-bottom: 10px; /* spacing from other elements */
+}
+
+/* Left menu column */
+#sidebar {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tooltip {
+    position: fixed;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    display: none;
+    z-index: 1000;
+}
+
+.tooltipMin {
+    position: fixed;
+    background: rgba(0,0,255,0.5);
+    border: 1px solid black;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    display: none;
+    z-index: 1001;
+}
+
+.tooltipMax {
+    position: fixed;
+    background: rgba(255,0,0,0.5);
+    border: 1px solid black;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    display: none;
+    z-index: 1002;
+}</style>
+    </head>
+    <body>
+        <section class="flexContainer">
+            <div id="logo">
+                <label for="nav-toggle-cb" id="nav-toggle"><h2>&#9776;&nbsp;&nbsp;Settings</h2></label>
+            </div>
+            <div id="GeneralSettings">
+                <div id="sidebar">
+                    <input type="checkbox" id="nav-toggle-cb" checked="checked">
+                    <nav id="menu">
+
+                        <section id="CaptureButtons">
+                            <button id="capture-image-btn" style="font-size: 16px; background: #00AA00;">Capture Raw Image</button>
+                            <button id="toggle-stream-btn" style="font-size: 16px; background: #00AA00;">Start Stream</button>
+
+                            <div class="group-grey-box">
+                                <div class="input-group" id="opacity-group">
+                                    <label for="opacity-slider">Thermap Opacity</label>
+                                    <div class="range-min">0%</div>
+                                    <input type="range" id="opacity-slider" min="0" max="100" value="50" title="50" oninput="this.title = this.value; document.getElementById('overlay-stream').style.opacity = this.value/100;">
+                                    <div class="range-max">100%</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+                        <label for="nav-toggle-mlx" class="toggle-section-label">&#9776;&nbsp;&nbsp;mlx90640 params</label>
+                        <input type="checkbox" id="nav-toggle-mlx" class="hidden toggle-section-button" checked="checked">
+
+                        <section class="toggle-section">
+                            <div class="group-grey-box">
+                                <div class="input-group" id="ambient-reflected-group">
+                                    <label for="ambReflected">Ambient Refl. Temp., C</label>
+                                    <div class="text">
+                                        <input id="ambReflected" type="number" min="-100" max="300" step="0.1" value="" class="default-action" style="width: 55px; margin-right: 10px;">
+                                    </div>
+                                </div>
+                                <div class="input-group" id="emissivity-group">
+                                    <label for="emissivity">Emissivity</label>
+                                    <div class="text">
+                                        <input id="emissivity" type="number" min="0" max="1.0" step="0.01" value="" class="default-action" style="width: 55px; margin-right: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group-grey-box">
+                                <div class="input-group" id="mlx-rr-group">
+                                    <label for="mlx_fast">Fast Refresh (.25/2 FPS)</label>
+                                    <div class="switch">
+                                        <input id="mlx_fast" type="checkbox" class="default-action">
+                                        <label class="slider" for="mlx_fast"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group-grey-box">
+                                <div class="input-group" id="mlx-devicet-group">
+                                    <label for="mlxDeviceT">Device Temperature, C</label>
+                                    <div class="text">
+                                        <input id="mlxDeviceT" type="text" readonly value="query" style="background-color: #202020; width: 55px; margin-right: 10px; border: 0px; color: #1FEFEF;">
+                                    </div>
+                                    <button class="inline-button" id="mlxDeviceTBtn" style="background: #00AA00;">Get</button>
+                                </div>
+                                <div class="input-group" id="mlx-devicev-group">
+                                    <label for="mlxDeviceV">Supply Voltage, V</label>
+                                    <div class="text">
+                                        <input id="mlxDeviceV" type="text" readonly value="query" style="background-color: #202020; width: 55px; margin-right: 10px; border: 0px; color: #1FEFEF;">
+                                    </div>
+                                    <button class="inline-button" id="mlxDeviceVBtn" style="background: #00AA00;">Get</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+                        <label for="nav-toggle-mlx-calibration" class="toggle-section-label">&#9776;&nbsp;&nbsp;mlx90640 calibration</label>
+                        <input type="checkbox" id="nav-toggle-mlx-calibration" class="hidden toggle-section-button" checked="checked">
+
+                        <section class="toggle-section">
+                            <div class="group-grey-box">
+                                <div class="input-group" id="calibration-observe">
+                                    <label for="mlx_observe_offset">Use calibration profile</label>
+                                    <div class="switch">
+                                        <input id="mlx_observe_offset" type="checkbox" class="default-action">
+                                        <label class="slider" for="mlx_observe_offset"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="calibration-date-group">
+                                    <label for="calibration_date">Last calibration date</label>
+                                    <input type="text" id="calibration_date" value="query device" size="10" readonly class="default-action" style="background-color: #202020; border: 0px; color: #1FEFEF; font-size: 12px;">
+                                </div>
+                                <div class="input-group" id="calibration-group" style="align-items: center;">
+                                    <progress id="calibration-progress" value="0" max="100">void</progress>
+                                    <button class="inline-button" id="toggle-calibrate-btn" style="display: inline-block; font-size: 14px; background: #00AA00; margin-left: auto; margin-right: 5px;">Calibrate</button>
+                                </div>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="calibration-save" style="align-items: center;">
+                                    Calibration profile
+                                    <button class="inline-button" id="toggle-calibrate-save-btn" style="display: inline-block; font-size: 14px; background: #00AA00; margin-left: auto; margin-right: 5px;">Save</button>
+                                </div>
+                                <div class="input-group" id="calibration-load-default" style="align-items: center;">
+                                    Load default
+                                    <button class="inline-button" id="toggle-calibrate-default-btn" style="display: inline-block; font-size: 14px; background: #00AA00; margin-left: auto; margin-right: 5px;">Reset</button>
+                                </div>
+                                <div>
+                                    <input type="file" id="calibration-fileInput" accept="text/plain" style="display: inline-block; max-width: 230px;">
+                                    <button id="upload-calibration-btn" style="display: inline-block;">Upload...</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+
+                        <label for="nav-toggle-win" class="toggle-section-label">&#9776;&nbsp;&nbsp;ov2640 resolution 'n crop</label>
+                        <input type="checkbox" id="nav-toggle-win" class="hidden toggle-section-button" checked="checked">
+                        <section class="toggle-section">
+
+                            <div class="group-grey-box">
+                                <div class="input-group" id="framesize-group">
+                                    <label for="framesize">Resolution</label>
+                                    <select id="framesize" class="default-action">
+                                        <!-- 2MP -->
+                                        <option value="15">UXGA(1600x1200)</option>
+                                        <option value="14">SXGA(1280x1024)</option>
+                                        <option value="13">HD(1280x720)</option>
+                                        <option value="12">XGA(1024x768)</option>
+                                        <option value="11">SVGA(800x600)</option>
+                                        <option value="10">VGA(640x480)</option>
+                                        <option value="9">HVGA(480x320)</option>
+                                        <option value="8">CIF(400x296)</option>
+                                        <!--option value="7">320x320</option--> <!-- Unsupported on ov2640 -->
+                                        <option value="6">QVGA(320x240)</option>
+                                        <option value="5">240x240</option>
+                                        <option value="4">HQVGA(240x176)</option>
+                                        <option value="3">QCIF(176x144)</option>
+                                        <option value="2">128x128</option>
+                                        <option value="1">QQVGA(160x120)</option>
+                                        <option value="0">96x96</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="input-group" id="quality-group">
+                                    <label for="quality">JPEG Quality</label>
+                                    <div class="range-min">4</div>
+                                    <input type="range" id="quality" min="4" max="63" value="10" title="10" class="default-action" oninput="this.title = this.value">
+                                    <div class="range-max">63</div>
+                                </div>
+                            </div>
+
+                            <div class="group-grey-box">
+                                <div class="input-group">
+                                    <label for="start-x">Raw Resolution</label>
+                                    <select id="start-x">
+                                        <option value="2">CIF (400x296)</option>
+                                        <option value="1">SVGA (800x600)</option>
+                                        <option value="0" selected="selected">UXGA (1600x1200)</option>
+                                    </select>
+                                </div>
+                                <br>
+
+                                <div class="input-group" id="set-offset-res-group">
+                                    <label for="offset-x">Window Start</label>
+                                    <div class="text">
+                                        X:<input id="offset-x" type="text" minlength="1" maxlength="3" size="5" value="150">
+                                    </div>
+                                    <div class="text">
+                                        Y:<input id="offset-y" type="text" minlength="1" maxlength="3" size="5" value="90">
+                                    </div>
+                                </div>
+                                <div class="input-group" id="set-total-res-group">
+                                    <label for="total-x">Window End</label>
+                                    <div class="text">
+                                        X:<input id="total-x" type="text" minlength="1" maxlength="4" size="5" value="1350">
+                                    </div>
+                                    <div class="text">
+                                        Y:<input id="total-y" type="text" minlength="1" maxlength="4" size="5" value="990">
+                                    </div>
+                                </div>
+                                <div class="input-group" id="set-output-res-group">
+                                    <label for="output-x">Output Size</label>
+                                    <div class="text">
+                                        X:<input id="output-x" type="text" minlength="1" maxlength="4" size="5" value="1200">
+                                    </div>
+                                    <div class="text">
+                                        Y:<input id="output-y" type="text" minlength="1" maxlength="4" size="5" value="900">
+                                    </div>
+                                </div>
+                                <button id="set-resolution">Set Resolution</button>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+                        <label for="nav-toggle-params" class="toggle-section-label">&#9776;&nbsp;&nbsp;ov2640 params</label>
+                        <input type="checkbox" id="nav-toggle-params" class="hidden toggle-section-button" checked="checked">
+                        <section class="toggle-section">
+                            <div class="group-grey-box">
+                                <div class="input-group" id="brightness-group">
+                                    <label for="brightness">Brightness</label>
+                                    <div class="range-min">-2</div>
+                                    <input type="range" id="brightness" min="-2" max="2" value="0" class="default-action">
+                                    <div class="range-max">2</div>
+                                </div>
+                                <div class="input-group" id="contrast-group">
+                                    <label for="contrast">Contrast</label>
+                                    <div class="range-min">-2</div>
+                                    <input type="range" id="contrast" min="-2" max="2" value="0" class="default-action">
+                                    <div class="range-max">2</div>
+                                </div>
+                                <div class="input-group" id="saturation-group">
+                                    <label for="saturation">Saturation</label>
+                                    <div class="range-min">-2</div>
+                                    <input type="range" id="saturation" min="-2" max="2" value="0" class="default-action">
+                                    <div class="range-max">2</div>
+                                </div>
+                            </div>
+                            <div class="input-group" id="special_effect-group">
+                                <label for="special_effect">Special Effect</label>
+                                <select id="special_effect" class="default-action">
+                                    <option value="0" selected="selected">No Effect</option>
+                                    <option value="1">Negative</option>
+                                    <option value="2">Grayscale</option>
+                                    <option value="3">Red Tint</option>
+                                    <option value="4">Green Tint</option>
+                                    <option value="5">Blue Tint</option>
+                                    <option value="6">Sepia</option>
+                                </select>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="awb-group">
+                                    <label for="awb">Auto White Balance</label>
+                                    <div class="switch">
+                                        <input id="awb" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="awb"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="awb_gain-group">
+                                    <label for="awb_gain">AWB Gain</label>
+                                    <div class="switch">
+                                        <input id="awb_gain" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="awb_gain"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="wb_mode-group">
+                                    <label for="wb_mode">WB Mode</label>
+                                    <select id="wb_mode" class="default-action">
+                                        <option value="0" selected="selected">Auto</option>
+                                        <option value="1">Sunny</option>
+                                        <option value="2">Cloudy</option>
+                                        <option value="3">Office</option>
+                                        <option value="4">Home</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="aec-group">
+                                    <label for="aec">Auto Exposure (AE)</label>
+                                    <div class="switch">
+                                        <input id="aec" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="aec"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="aec2-group">
+                                    <label for="aec2">AE Refined</label>
+                                    <div class="switch">
+                                        <input id="aec2" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="aec2"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="ae_level-group">
+                                    <label for="ae_level">AE Bias</label>
+                                    <div class="range-min">-2</div>
+                                    <input type="range" id="ae_level" min="-2" max="2" value="0" class="default-action">
+                                    <div class="range-max">2</div>
+                                </div>
+                                <div class="input-group hidden" id="aec_value-group">
+                                    <label for="aec_value">AE Value</label>
+                                    <div class="range-min">0</div>
+                                    <input type="range" id="aec_value" min="0" max="1200" value="204" class="default-action">
+                                    <div class="range-max">1200</div>
+                                </div>
+                                <div class="input-group" id="agc-group">
+                                    <label for="agc">Auto Analog Gain</label>
+                                    <div class="switch">
+                                        <input id="agc" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="agc"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group hidden" id="agc_gain-group">
+                                    <label for="agc_gain">Gain</label>
+                                    <div class="range-min">1x</div>
+                                    <input type="range" id="agc_gain" min="0" max="30" value="5" class="default-action">
+                                    <div class="range-max">31x</div>
+                                </div>
+                                <div class="input-group" id="gainceiling-group">
+                                    <label for="gainceiling">Auto Gain Ceiling</label>
+                                    <div class="range-min">2x</div>
+                                    <input type="range" id="gainceiling" min="0" max="6" value="0" class="default-action">
+                                    <div class="range-max">128x</div>
+                                </div>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="bpc-group">
+                                    <label for="bpc">Black Px Correction</label>
+                                    <div class="switch">
+                                        <input id="bpc" type="checkbox" class="default-action">
+                                        <label class="slider" for="bpc"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="wpc-group">
+                                    <label for="wpc">White Px Correction</label>
+                                    <div class="switch">
+                                        <input id="wpc" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="wpc"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="raw_gma-group">
+                                    <label for="raw_gma">Gamma Correction</label>
+                                    <div class="switch">
+                                        <input id="raw_gma" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="raw_gma"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="lenc-group">
+                                    <label for="lenc">Lens Shading Corr</label>
+                                    <div class="switch">
+                                        <input id="lenc" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="lenc"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-grey-box">
+                                <div class="input-group" id="hmirror-group">
+                                    <label for="hmirror">H-Mirror</label>
+                                    <div class="switch">
+                                        <input id="hmirror" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="hmirror"></label>
+                                    </div>
+                                </div>
+                                <div class="input-group" id="vflip-group">
+                                    <label for="vflip">V-Flip</label>
+                                    <div class="switch">
+                                        <input id="vflip" type="checkbox" class="default-action" checked="checked">
+                                        <label class="slider" for="vflip"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group" id="dcw-group">
+                                <label for="dcw">Color Noise Reduction</label>
+                                <div class="switch">
+                                    <input id="dcw" type="checkbox" class="default-action" checked="checked">
+                                    <label class="slider" for="dcw"></label>
+                                </div>
+                            </div>
+                            <div class="input-group" id="colorbar-group">
+                                <label for="colorbar">Color Bar Pattern</label>
+                                <div class="switch">
+                                    <input id="colorbar" type="checkbox" class="default-action">
+                                    <label class="slider" for="colorbar"></label>
+                                </div>
+                            </div>
+
+                            <div class="input-group" id="led-group">
+                                <label for="led_intensity">LED Intensity</label>
+                                <div class="range-min">0</div>
+                                <input type="range" id="led_intensity" min="0" max="255" value="0" class="default-action">
+                                <div class="range-max">255</div>
+                            </div>
+
+                            <section id="xclk-section" class="nothidden">
+                                <div class="input-group" id="set-xclk-group">
+                                    <label for="set-xclk">XCLK, MHz</label>
+                                    <div class="text">
+                                        <input id="xclk" type="text" minlength="1" maxlength="2" size="2" value="20">
+                                    </div>
+                                    <button class="inline-button" id="set-xclk">Set</button>
+                                </div>
+                            </section>
+
+                        </section>
+
+                        <hr style="width:100%">
+                        <label for="nav-toggle-reg" class="toggle-section-label">&#9776;&nbsp;&nbsp;ov2640 register Get/Set</label>
+                        <input type="checkbox" id="nav-toggle-reg" class="hidden toggle-section-button" checked="checked">
+                        <section class="toggle-section">
+                            <!--h4>Set Register</h4-->
+                            <div class="input-group" id="set-reg-group">
+                                <label for="reg-addr">Reg</label>
+                                <div class="text">
+                                    <input id="reg-addr" type="text" minlength="4" maxlength="6" size="6" value="0x111">
+                                </div>
+                            </div>
+                            <div class="input-group" id="set-mask-group">
+                                <label for="reg-mask">Mask</label>
+                                <div class="text">
+                                    <input id="reg-mask" type="text" minlength="4" maxlength="4" size="4" value="0x80">
+                                </div>
+                            </div>
+                            <div class="input-group" id="set-value-group">
+                                <label for="reg-value">Value</label>
+                                <div class="text">
+                                    <input id="reg-value" type="text" minlength="4" maxlength="4" size="4" value="0x80">
+                                </div>
+                            </div>
+                            <div class="input-group" id="reg-set-button-group">
+                                <label></label>
+                                <button class="inline-button" id="set-reg">Set</button>
+                            </div>
+
+                            <hr style="width:50%">
+                            <!--h4>Get Register</h4-->
+                            <div class="input-group" id="get-reg-group">
+                                <label for="get-reg-addr">Reg</label>
+                                <div class="text">
+                                    <input id="get-reg-addr" type="text" minlength="4" maxlength="6" size="6" value="0x111">
+                                </div>
+                            </div>
+                            <div class="input-group" id="get-reg-group">
+                                <label for="get-reg-mask">Mask</label>
+                                <div class="text">
+                                    <input id="get-reg-mask" type="text" minlength="4" maxlength="6" size="6" value="0x80">
+                                </div>
+                            </div>
+                            <div class="input-group" id="reg-get-button-group">
+                                <label></label>
+                                <button class="inline-button" id="get-reg">Get</button>
+                            </div>
+                            <div class="input-group">
+                                <label for="get-reg-value">Value</label>
+                                <div class="text">
+                                    <span id="get-reg-value">0x1234</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+
+                        <label for="nav-toggle-2640pll" class="toggle-section-label">&#9776;&nbsp;&nbsp;ov2640 CLK</label>
+                        <input type="checkbox" id="nav-toggle-2640pll" class="hidden toggle-section-button" checked="checked">
+                        <section class="toggle-section">
+                            <div class="input-group">
+                                <label for="2640pll1">CLK 2X</label>
+                                <div class="switch">
+                                    <input id="2640pll1" type="checkbox" class="reg-action" reg="0x111" offset="7" mask="0x01">
+                                    <label class="slider" for="2640pll1"></label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="2640pll3">CLK DIV</label>
+                                <div class="text">
+                                    0
+                                    <input id="2640pll3" type="text" minlength="1" maxlength="2" size="2" value="1" class="reg-action" reg="0x111" offset="0" mask="0x3f">63
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="2640pll5">Auto PCLK</label>
+                                <div class="switch">
+                                    <input id="2640pll5" type="checkbox" class="reg-action" reg="0xd3" offset="7" mask="0x01">
+                                    <label class="slider" for="2640pll5"></label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="2640pll4">PCLK DIV</label>
+                                <div class="text">
+                                    0
+                                    <input id="2640pll4" type="text" minlength="1" maxlength="3" size="3" value="4" class="reg-action" reg="0xd3" offset="0" mask="0x7f">127
+                                </div>
+                            </div>
+                        </section>
+
+                        <hr style="width:100%">
+
+                        <label for="nav-toggle-http" class="toggle-section-label">&#9776;&nbsp;&nbsp;Firmware</label>
+                        <input type="checkbox" id="nav-toggle-http" class="hidden toggle-section-button" checked="checked">
+                        <section class="toggle-section">
+
+                            <div class="group-grey-box">
+                                <input type="file" id="firmware-fileInput" accept="text/html" style="display: inline-block; max-width: 230px;">
+                                <button id="upload-firmware-btn" style="display: inline-block;">Update...</button>
+                            </div>
+
+                            <div class="group-grey-box">
+                                <button id="reboot-btn">Reboot ESP32...</button>
+                            </div>
+
+                        </section>
+                    </nav>
+                </div>
+
+                <figure>
+                    <div id="stream-container" class="image-container">
+                        <img id="stream" src="" crossorigin>
+                        <!-- Overlay image -->
+                        <img id="overlay-stream" style="
+                                   position: absolute;
+                                   top: 0; left: 0;
+                                   width: 100%; height: auto;
+                                   border-radius: 4px;
+                                   opacity: 0.5;
+                                   /*pointer-events: none; /* so clicks go to underlying elements */">
+                        <button id="save-still-btn" type="button" class="button saveButton">Save image</button>
+                        <button id="save-data-btn" type="button" class="button saveButton" style="top: 35px;">Save thermal field</button>
+                    </div>
+                </figure>
+
+            </div>
+        </section>
+
+        <div id="tooltip" class="tooltip"></div>
+
+        <div id="tooltipMin" class="tooltipMin"></div>
+        <div id="tooltipMax" class="tooltipMax"></div>
+
+        <script>
+const $ = (id) => document.getElementById(id);
+
+var baseHost         = document.location.origin;
+var streamUrl        = baseHost + ':81';
+var streamOverlayUrl = baseHost + ':82';
+
+
+function fetchUrl(url, cb)
+{
+    fetch(url)
+        .then(function(response)
+        {
+            if (response.status !== 200) { cb(response.status, response.statusText); }
+            else {
+                response.text()
+                    .then(function(data) { cb(200, data); })
+                    .catch(function(err) { cb(-1, err); });
+            }
+        })
+        .catch(function(err) { cb(-1, err); });
+}
+
+function setReg(reg, offset, mask, value, cb) {
+    //console.log('Set Reg', '0x'+reg.toString(16), offset, '0x'+mask.toString(16), '0x'+value.toString(16), '('+value+')');
+    value = (value & mask) << offset;
+    mask = mask << offset;
+    fetchUrl(`${baseHost}/reg?reg=${reg}&mask=${mask}&val=${value}`, cb);
+}
+
+function getReg(reg, offset, mask, cb) {
+    mask = mask << offset;
+    fetchUrl(`${baseHost}/greg?reg=${reg}&mask=${mask}`, function(code, txt) {
+        let value = 0;
+        if(code == 200) {
+            value = parseInt(txt);
+            value = (value & mask) >> offset;
+            txt = ''+value;
+        }
+        cb(code, txt);
+    });
+}
+
+const updateRegValue = (el, value, updateRemote) => {
+    let initialValue;
+    let offset = el.attributes.offset ? parseInt(el.attributes.offset.nodeValue) : 0;
+    let mask   = (el.attributes.mask ? parseInt(el.attributes.mask.nodeValue) : 255) << offset;
+    value = (value & mask) >> offset;
+    if (el.type === 'checkbox') {
+        initialValue = el.checked;
+        value = !!value;
+        el.checked = value;
+    }
+    else
+    {
+        initialValue = el.value;
+        el.value = value;
+    }
+}
+
+const printReg = (el) => {
+    let reg    = el.attributes.reg ? parseInt(el.attributes.reg.nodeValue) : 0;
+    let offset = el.attributes.offset ? parseInt(el.attributes.offset.nodeValue) : 0;
+    let mask   = el.attributes.mask ? parseInt(el.attributes.mask.nodeValue) : 255;
+    let value = 0;
+    switch (el.type) {
+        case 'checkbox':
+            value = el.checked ? mask : 0;
+            break;
+        case 'range':
+        case 'select-one':
+            value = el.value;
+            break
+        default:
+            return;
+    }
+    value = (value & mask) << offset;
+    return '0x'+reg.toString(16)+', 0x'+value.toString(16);
+}
+
+/* start_x is used to pass native resolution, start_y is not used*/
+function setWindow(start_x, offset_x,offset_y, total_x,total_y, output_x, output_y, cb)
+{
+    fetchUrl(`${baseHost}/resolution?sx=${start_x}&offx=${offset_x}&offy=${offset_y}&tx=${total_x}&ty=${total_y}&ox=${output_x}&oy=${output_y}`, cb);
+}
+
+const hide = el => {
+    el.classList.add('hidden');
+}
+const show = el => {
+    el.classList.remove('hidden');
+}
+
+const disable = el => {
+    el.classList.add('disabled');
+    el.disabled = true;
+}
+
+const enable = el => {
+    el.classList.remove('disabled');
+    el.disabled = false;
+}
+
+const updateGUIvalue = (el, value, updateRemote) => {
+
+    updateRemote = updateRemote == null ? true : updateRemote;
+
+    let initialValue;
+    if (el.type === 'checkbox')
+    {
+        initialValue = el.checked;
+        value = !!value;
+        el.checked = value;
+    }
+    else
+    {
+        initialValue = el.value;
+        el.value = value;
+    }
+
+    if (updateRemote && initialValue !== value) {
+        updateDeviceParam(el);
+    }
+    else if (!updateRemote)
+    {
+        if (el.id === "aec") {
+            value ? hide(exposure) : show(exposure);
+        }
+        else if (el.id === "agc")
+        {
+            if (value) {
+                show(gainCeiling);
+                hide(agcGain);
+            }
+            else
+            {
+                hide(gainCeiling);
+                show(agcGain);
+            }
+        }
+        else if (el.id === "awb_gain") {
+            value ? show(wb) : hide(wb);
+        }
+        else if (el.id == "led_intensity") {
+            value > -1 ? show(ledGroup) : hide(ledGroup);
+        }
+    }
+}
+
+
+function updateDeviceParam(el) {
+
+    let value;
+
+    switch (el.type)
+    {
+        case 'checkbox':
+            value = el.checked ? 1 : 0;
+            break
+        case 'number':
+            value = parseFloat(el.value);
+            break
+        case 'range':
+        case 'select-one':
+            value = el.value;
+            break
+        case 'button':
+        case 'submit':
+            value = '1';
+            break
+        default:
+            return
+    }
+
+    const query = `${baseHost}/control?var=${el.id}&val=${value}`;
+
+    fetch(query)
+      .then(response => { 
+          console.log(`request to ${query} finished, status: ${response.status}`);
+      })
+}
+
+
+const ledGroup    = $('led-group');
+const agc         = $('agc');
+const agcGain     = $('agc_gain-group');
+const gainCeiling = $('gainceiling-group');
+const aec         = $('aec');
+const exposure    = $('aec_value-group');
+const awb         = $('awb_gain');
+const wb          = $('wb_mode-group');
+
+//=================================================================================
+
+document.addEventListener('DOMContentLoaded', function (event)
+{
+    $('set-reg').onclick = () => {
+        let reg   = parseInt($('reg-addr').value);
+        let mask  = parseInt($('reg-mask').value);
+        let value = parseInt($('reg-value').value);
+
+        setReg(reg, 0, mask, value, function(code, txt) { if (code != 200) { alert('Error['+code+']: '+txt); }
+        });
+    }
+
+    $('get-reg').onclick = () => {
+        let reg   = parseInt($('get-reg-addr').value);
+        let mask  = parseInt($('get-reg-mask').value);
+        let value = $('get-reg-value');
+
+        getReg(reg, 0, mask, function(code, txt) {
+            if (code != 200) { value.innerHTML = 'Error['+code+']: '+txt; }
+            else {
+                value.innerHTML = '0x' + parseInt(txt).toString(16) + ' ('+txt+')';
+            }
+        });
+    }
+
+    $('set-xclk').onclick = () => {
+        let xclk = parseInt($('xclk').value);
+
+        fetchUrl(`${baseHost}/xclk?xclk=${xclk}`,
+                 function(code, txt) { if (code != 200) { alert('Error['+code+']: '+txt); }  }
+                );
+    }
+
+    $('mlxDeviceTBtn').onclick = () => {
+        fetchUrl(`${baseHost}/mlx?var=device_temperature&val=0`,
+                 function(code, txt) {
+                     if (code != 200)
+                         alert('Error[' + code + ']: ' + txt);
+                     else
+                         $('mlxDeviceT').value = txt;
+                 }
+             );
+    }
+
+    $('mlxDeviceVBtn').onclick = () => {
+        fetchUrl(`${baseHost}/mlx?var=device_voltage&val=0`,
+                 function(code, txt) {
+                     if (code != 200)
+                         alert('Error[' + code + ']: ' + txt);
+                     else
+                         $('mlxDeviceV').value = txt;
+                 }
+             );
+    }
+
+    $('set-resolution').onclick = () => {
+        let start_x  = parseInt($('start-x').value);
+        let offset_x = parseInt($('offset-x').value);
+        let offset_y = parseInt($('offset-y').value);
+        let total_x  = parseInt($('total-x').value);
+        let total_y  = parseInt($('total-y').value);
+        let output_x = parseInt($('output-x').value);
+        let output_y = parseInt($('output-y').value);
+                  
+        setWindow(start_x, offset_x,offset_y, total_x,total_y, output_x,output_y,
+                  function (code, txt) {
+                      if (code != 200) { alert('Error['+code+']: ' + txt);
+                      }
+                  });
+    }
+
+    const setRegValue = (el) => {
+
+        let reg    = el.attributes.reg    ? parseInt(el.attributes.reg.nodeValue)    : 0;
+        let offset = el.attributes.offset ? parseInt(el.attributes.offset.nodeValue) : 0;
+        let mask   = el.attributes.mask   ? parseInt(el.attributes.mask.nodeValue)   : 255;
+        let value = 0;
+        switch (el.type) {
+            case 'checkbox':
+                value = el.checked ? mask : 0;
+                break;
+            case 'range':
+            case 'text':
+            case 'select-one':
+                value = el.value;
+                break
+            default:
+                return;
+        }
+
+        setReg(reg, offset, mask, value,
+               function(code, txt) { if (code != 200) { alert('Error['+code+']: '+txt); }  }
+              );
+    }
+
+    // Attach on change action for register elements
+    document
+      .querySelectorAll('.reg-action')
+      .forEach(el => {
+          if (el.type === 'text') {
+              el.onkeyup = function(e) { if (e.keyCode == 13) { setRegValue(el); }  }
+          }
+          else {
+              el.onchange = () => setRegValue(el);
+          }
+      })
+
+
+    // read initial values
+    fetch(`${baseHost}/status`)
+        .then(function (response) { return response.json(); })
+        .then(function (state) {
+            document
+                .querySelectorAll('.default-action')
+                    .forEach( el => { updateGUIvalue(el, state[el.id], false); } );
+
+            document
+                .querySelectorAll('.reg-action')
+                    .forEach(el => {
+                        let reg = el.attributes.reg ? parseInt(el.attributes.reg.nodeValue) : 0;
+                        if (reg == 0) { return; }
+
+                        updateRegValue(el, state['0x' + reg.toString(16)], false);
+                    })
+        });
+
+
+
+    // Attach default on change action
+    document
+      .querySelectorAll('.default-action')
+      .forEach(el => { el.onchange = () => updateDeviceParam(el); })
+
+    // Custom actions
+
+    // Gain
+    agc.onchange = () => {
+        updateDeviceParam(agc);
+        if (agc.checked)
+        {
+            show(gainCeiling);
+            hide(agcGain);
+        }
+        else
+        {
+            hide(gainCeiling);
+            show(agcGain);
+        }
+    }
+
+    // Exposure
+    aec.onchange = () => {
+        updateDeviceParam(aec);
+        aec.checked ? hide(exposure) : show(exposure);
+    }
+
+    // AWB
+    awb.onchange = () => {
+        updateDeviceParam(awb);
+        awb.checked ? show(wb) : hide(wb);
+    }
+
+})
+</script>
+        <script>
+
+$("upload-firmware-btn").addEventListener("click", async () => {
+    let fileInput = $("firmware-fileInput");
+
+    // Check if any file is selected
+    if (!fileInput.files || fileInput.files.length === 0) {
+        alert("No file selected");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    if (file.size === 0) {
+        alert("File is empty");
+        return;
+    }
+
+    if ( !confirm("Are you sure you want to update server firmware?") ) return;
+
+    try {
+        // send raw binary directly
+        const response = await fetch(`${baseHost}/uploadserver`, {
+            method: "POST",
+            headers: {
+                "X-Client-Date": new Date().toString().split(' GMT')[0]  // e.g. "Wed, 20 Aug 2025 02:45:32"
+            },
+            body: file
+        });
+        if (!response.ok) throw new Error("Upload failed");
+
+        const text = await response.text();
+
+        alert("Server says: " + text);
+
+        // Reload the page by adding a timestamp to force fresh load
+        window.location.href = window.location.href.split('?')[0] + '?_=' + new Date().getTime();
+    }
+    catch (err) {
+        alert("Error: " + err.message);
+    }
+
+}); // upload
+
+
+$("reboot-btn").addEventListener("click", () => {
+
+    if ( !confirm("Are you sure you want to reboot esp32 ?") ) return;
+
+    fetch(`${baseHost}/reboot`)
+     .then(response => { 
+         console.log(`Reboot sent, status: ${response.status}`);
+     });
+
+});
+</script>
+        <script>
+const g_floats = new Float32Array(32*24);
+
+
+function ironbow(value, minVal, maxVal)
+{
+    let t;
+    
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // The block makes sure that too small dynamic range does not become mapped over
+    // the whole ironbow colormap causing a lot of contrasting pixels around the image
+
+    const minRange = 10.0;
+    if (maxVal - minVal > minRange)
+        t = (value - minVal) / (maxVal - minVal);
+    else
+        t = (value - minVal) / minRange;
+
+    let r = 0, g = 0, b = 0;
+
+    if (t < 0.25) {              // Blue to Purple
+        r = 128.0 * (t / 0.25);
+        g = 0;
+        b = 255.0;
+    } else if (t < 0.5) {        // Purple to Red
+        r = 128.0 + 127.0 * ((t - 0.25) / 0.25);
+        g = 0;
+        b = 255.0 - 255.0 * ((t - 0.25) / 0.25);
+    } else if (t < 0.75) {       // Red to Orange
+        r = 255.0;
+        g = 128.0 * ((t - 0.5) / 0.25);
+        b = 0;
+    } else {                     // Orange to Yellow/White
+        r = 255.0;
+        g = 128.0 + 127.0 * ((t - 0.75) / 0.25);
+        b = 127.0 * ((t - 0.75) / 0.25);
+    }
+
+    // Clamp to [0..255] and integer
+    r = Math.max(0, Math.min(255, Math.round(r)));
+    g = Math.max(0, Math.min(255, Math.round(g)));
+    b = Math.max(0, Math.min(255, Math.round(b)));
+
+    return [r, g, b]; // array [R,G,B]
+}
+
+let frameMinTemp = 0;
+let frameMaxTemp = 0;
+
+let fMinXcoord = 0;
+let fMinYcoord = 0;
+let fMaxXcoord = 0;
+let fMaxYcoord = 0;
+
+
+// width has to be multiple of 4 bytes
+function drawBMPBase64(frameData, width, height, elId)
+{
+    const bpp            = 3;
+    const BMP_HEADER_LEN = 54;
+    const pix_count      = width * height;
+    const dataSize       = pix_count*bpp; 
+    const fileSize       = BMP_HEADER_LEN + dataSize;
+
+    // zeroed during creation
+    const outBuffer = new Uint8Array(fileSize);
+
+    // --- BMP Header (14 bytes) ---
+    outBuffer[0] = 0x42; // 'B'
+    outBuffer[1] = 0x4D; // 'M'
+    outBuffer[2] =  fileSize & 0xFF;
+    outBuffer[3] = (fileSize >> 8) & 0xFF;
+    outBuffer[4] = (fileSize >> 16) & 0xFF;
+    outBuffer[5] = (fileSize >> 24) & 0xFF;
+    outBuffer[10] = BMP_HEADER_LEN; // pixel data offset
+
+    // --- DIB Header (BITMAPINFOHEADER, 40 bytes) ---
+    outBuffer[14] = 40; // header size
+    outBuffer[18] =  width & 0xFF;
+    outBuffer[19] = (width >> 8) & 0xFF;
+    outBuffer[20] = (width >> 16) & 0xFF;
+    outBuffer[21] = (width >> 24) & 0xFF;
+    outBuffer[22] =  height & 0xFF;
+    outBuffer[23] = (height >> 8) & 0xFF;
+    outBuffer[24] = (height >> 16) & 0xFF;
+    outBuffer[25] = (height >> 24) & 0xFF;
+    outBuffer[26] = 1;     // planes
+    outBuffer[28] = 24;    // bits per pixel (24-bit RGB)
+    outBuffer[30] = 0;     // compression
+    outBuffer[31] = 0;     // compression
+    outBuffer[32] = 0;     // compression
+    outBuffer[33] = 0;     // compression
+    outBuffer[34] =  dataSize & 0xFF;
+    outBuffer[35] = (dataSize >> 8) & 0xFF;
+    outBuffer[36] = (dataSize >> 16) & 0xFF;
+    outBuffer[37] = (dataSize >> 24) & 0xFF;
+
+    // Reinterpret as Float32Array
+    const floats = new Float32Array(frameData.buffer, frameData.byteOffset, frameData.byteLength / 4);
+    
+    // save array to global copy
+    if (elId == 'overlay-stream') g_floats.set(floats);
+
+    //--Find min max--------------------------------------
+    let fMin =  Infinity;
+    let fMax = -Infinity;
+
+    for (let y=0; y < height; y++) {
+        for (let x=0; x < width; x++)
+        {
+            let srcInd = y * width + x;
+
+            if (floats[srcInd] < fMin) {
+                fMin = floats[srcInd];
+                fMinXcoord = width-1  - x;
+                fMinYcoord = height-1 - y;
+            }
+            if (floats[srcInd] > fMax) {
+                fMax = floats[srcInd];
+                fMaxXcoord = width-1  - x;
+                fMaxYcoord = height-1 - y;
+            }
+        }
+    }
+
+    frameMinTemp = fMin;
+    frameMaxTemp = fMax;
+    
+    let i = 0;
+    for (let y=0; y < height; y++)
+    {
+        for (let x=0; x < width; x++)
+        {
+            let srcInd = y * width + (width-1 - x);     // mirror horizontally
+
+            const [r, g, b] = ironbow(floats[srcInd], fMin, fMax);
+
+            let indOut = BMP_HEADER_LEN + i*3;
+
+            // imgData.data is Uint8ClampedArray of length width x height x 4
+            outBuffer[indOut + 0] = b;
+            outBuffer[indOut + 1] = g;
+            outBuffer[indOut + 2] = r;
+            i++;
+        }
+    }
+
+    function uint8ToBase64(uint8)
+    {
+        let binary = "";
+        for (let i=0; i < uint8.length; i++) {
+            binary += String.fromCharCode(uint8[i]);
+        }
+        return btoa(binary);
+    }
+
+    const img = $(elId);
+    img.src   = "data:image/bmp;base64," + uint8ToBase64(outBuffer);
+}
+
+
+function indexOfSubarray(haystack, needle)
+{
+    if (needle.length === 0) return -1;
+
+    for (let i=0; i <= haystack.length - needle.length; i++)
+    {
+        let match = true;
+        for (let j=0; j < needle.length; j++)
+        {
+            if (haystack[i + j] !== needle[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) return i;
+    }
+    return -1;
+}
+
+/*
+HTTP/1.1 200 OK
+Content-Type: multipart/x-mixed-replace; boundary=frame
+
+--frame
+Content-Type: image/jpeg
+Content-Length: 12345
+
+[binary JPEG data for frame 1]
+
+--frame
+Content-Type: image/jpeg
+Content-Length: 12087
+*/
+
+let controller = null;
+
+async function fetchMultipartBinary(url)
+{
+    controller = new AbortController();
+
+    try
+    {
+        const response = await fetch(url, { signal: controller.signal });
+
+        if (!response.ok)   throw new Error("HTTP error " + response.status);
+        if (!response.body) throw new Error("ReadableStream not supported");
+
+        // Get boundary from headers
+        const contentType = response.headers.get("Content-Type") || "";
+        const match = contentType.match(/boundary=([^;]+)/i);
+        if (!match) throw new Error("No boundary in Content-Type header");
+				    
+        // encode into Uint8Array
+        const boundarySeparator = new TextEncoder().encode("--" + match[1] + "\r\n");
+
+        // get ReadableStreamDefaultReader
+        const reader = response.body.getReader();
+
+        let buffer = new Uint8Array(0);
+
+        // helper: concatenate Uint8Arrays
+        function concat(a, b) {
+            let c = new Uint8Array(a.length + b.length);
+
+            c.set(a, 0);        // (array, offset in c)
+            c.set(b, a.length); // (array, offset in c)
+
+            return c;
+        }
+
+        const header2dataSeparator = new TextEncoder().encode("\r\n\r\n");
+
+        while (true) {
+            // "value" is Uint8Array holding received chunk of data
+            // "done" is boolean turining into true when stream is finished
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (!value) continue;
+
+            buffer = concat(buffer, value);
+
+            let indBoundaryStart;
+            // Search for boundary
+            while ((indBoundaryStart = indexOfSubarray(buffer, boundarySeparator)) !== -1)
+            {
+                // Extract CHUNK up to boundary into a new array
+                const chunk = buffer.slice(0, indBoundaryStart);
+
+                // Delete CHUNK and trailing Boundary marker from the upcomming data buffer
+                buffer = buffer.slice(indBoundaryStart + boundarySeparator.length);
+
+                // PARSE THE CHUNK ---------------------------------------------
+
+                // Split headers and body
+                const indHeaderEnd = indexOfSubarray(chunk, header2dataSeparator);
+
+                if (indHeaderEnd !== -1) {
+                    const headerBytes = chunk.slice(0, indHeaderEnd);
+                    // observe trailing "\n\r"
+                    const bodyBytes   = chunk.slice(indHeaderEnd + header2dataSeparator.length, chunk.length-2);
+
+                    const headers = new TextDecoder().decode(headerBytes);
+                    const match = headers.match(/Content-Length:\s*(\d+)/);
+                    const contentLength = match ? parseInt(match[1], 10) : null;
+				                
+                    // Call user function with binary body
+                    if (contentLength == 32*24*4)
+                        drawBMPBase64(bodyBytes, 32, 24, 'overlay-stream');
+                }
+            }
+        }
+    }
+    catch (err)
+    {
+        if (err.name === "AbortError")
+            console.log("Fetch aborted by user");
+        else
+            console.error("Fetch failed:", err);
+    }
+}
+
+async function fetchBinary(url)
+{
+    const response = await fetch(url);
+
+    if (!response.ok)   throw new Error("HTTP error " + response.status);
+
+    const bodyBytes = await response.arrayBuffer(); // wait for full body
+
+    if (bodyBytes.byteLength == 32*24*4)
+        drawBMPBase64(new Uint8Array(bodyBytes), 32, 24, 'overlay-stream');
+}
+
+
+const viewOverlay = $('overlay-stream');
+const tooltip     = $('tooltip');
+
+
+// a timer and a global object storing mouse coords so timer cunc can access last known coords
+let timerMouseMove = null;
+let mouseEventCopy = {
+    clientX: 0,
+    clientY: 0
+};
+
+function handleMouseMove(e)
+{
+    const rect = viewOverlay.getBoundingClientRect();
+
+    // Mouse position relative to image
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Scale to thermal array resolution
+    const scaledX = 31 - Math.floor(x / rect.width  * 32);  // mirror
+    const scaledY = 23 - Math.floor(y / rect.height * 24);  // flip
+
+    // Bounds check
+    if (scaledX >= 0 && scaledX < 32 &&
+        scaledY >= 0 && scaledY < 24)
+    {
+        const value = g_floats[scaledY * 32 + scaledX];
+
+        //tooltip.textContent   = `(${scaledX},${scaledY}) = ` + (value).toFixed(1) + "\u00B0C";
+        tooltip.textContent   = (value).toFixed(1) + "\u00B0C";
+        tooltip.style.left    = e.clientX + 16 + "px";
+        tooltip.style.top     = e.clientY - 32 + "px";
+        tooltip.style.display = "block";
+    }
+    else {
+        tooltip.style.display = "none";
+    }
+}
+
+viewOverlay.addEventListener("mousemove", (e) => {
+
+    // update coords
+    mouseEventCopy.clientX = e.clientX;
+    mouseEventCopy.clientY = e.clientY;
+
+    handleMouseMove(mouseEventCopy);
+});
+
+viewOverlay.addEventListener("mouseenter", (e) => {
+    
+    // update coords
+    mouseEventCopy.clientX = e.clientX;
+    mouseEventCopy.clientY = e.clientY;
+    
+    // call every XXX ms
+    timerMouseMove = setInterval(() => handleMouseMove(mouseEventCopy), 1000);
+});
+
+viewOverlay.addEventListener("mouseleave", () => {
+    tooltip.style.display = "none";
+
+    clearInterval(timerMouseMove);
+    timerMouseMove = null;
+});
+
+
+function handleMinMaxTooltips()
+{
+    const rect = viewOverlay.getBoundingClientRect();
+
+    const scaleX = rect.width  / 32;
+    const scaleY = rect.height / 24;
+
+    //================================================================
+
+    let x = rect.left + fMinXcoord*scaleX;
+    let y = rect.top  + fMinYcoord*scaleY;
+
+    // Bounds check
+    if (fMinXcoord >= 0 && fMinXcoord < 32 &&
+        fMinYcoord >= 0 && fMinYcoord < 24)
+    {
+        tooltipMin.textContent   = (frameMinTemp).toFixed(1) + "\u00B0C";
+        tooltipMin.style.left    = x + "px";
+        tooltipMin.style.top     = y + "px";
+        tooltipMin.style.display = "block";
+    }
+
+    //==================================================================
+
+    x = rect.left + fMaxXcoord*scaleX;
+    y = rect.top  + fMaxYcoord*scaleY;
+
+    // Bounds check
+    if (fMaxXcoord >= 0 && fMaxXcoord < 32 &&
+        fMaxYcoord >= 0 && fMaxYcoord < 24)
+    {
+        tooltipMax.textContent   = (frameMaxTemp).toFixed(1) + "\u00B0C";
+        tooltipMax.style.left    = x + 5 + "px";
+        tooltipMax.style.top     = y + 5 + "px";
+        tooltipMax.style.display = "block";
+    }
+}
+
+setInterval(() => handleMinMaxTooltips(), 2000);
+
+// Initialize images
+drawBMPBase64(new Uint8Array(32*24*4), 32, 24, 'overlay-stream');   // inits also temperature array
+drawBMPBase64(new Uint8Array(32*24*4), 32, 24, 'stream');
+
+
+const view = $('stream');
+
+const startStream = () => {
+    view.src = `${streamUrl}/stream`;
+    //viewOverlay.src = `${streamOverlayUrl}/stream`;
+
+    fetchMultipartBinary(`${streamOverlayUrl}/stream`);
+
+    $('toggle-stream-btn').innerHTML = 'Stop Stream';
+    $('toggle-stream-btn').style.background = '#ff3034';
+}
+
+const stopStream = () => {
+    //window.stop();
+    //view.src = '';
+
+    const canvas  = document.createElement('canvas');
+    canvas.width  = view.naturalWidth;
+    canvas.height = view.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(view, 0, 0, canvas.width, canvas.height);
+
+    view.src = canvas.toDataURL('image/png');
+
+    if (controller) {
+        controller.abort(); // stops the fetch
+        controller = null;
+    }
+
+    $('toggle-stream-btn').innerHTML = 'Start Stream';
+    $('toggle-stream-btn').style.background = '#00AA00';
+}
+
+
+// Attach actions to buttons
+$('capture-image-btn').onclick = () => {
+    stopStream();
+    view.src = `${baseHost}/capture2640?_cb=${Date.now()}`;
+        
+    //viewOverlay.src = `${baseHost}/capture90640?_cb=${Date.now()}`;
+    fetchBinary(`${baseHost}/capture90640?_cb=${Date.now()}`);
+}
+
+$('toggle-stream-btn').onclick = () => {
+    const streamStarted = $('toggle-stream-btn').innerHTML === 'Stop Stream';
+					
+    if (streamStarted)
+        stopStream();
+    else
+        startStream();
+}
+</script>
+        <script>
+
+function drawDivToCanvas(divId, canvas)
+{
+    const div = $(divId);
+    if (!div) return;
+
+    const ctx   = canvas.getContext("2d");
+    const style = getComputedStyle(div);
+
+    const rect        = div.getBoundingClientRect();
+    const rectOverlay = $('overlay-stream').getBoundingClientRect();
+
+    const left = rect.left - rectOverlay.left;
+    const top  = rect.top  - rectOverlay.top;
+
+    const width  = rect.width;
+    const height = rect.height;
+
+    const paddingTop   = parseFloat(style.paddingTop);
+    const paddingLeft  = parseFloat(style.paddingLeft);
+    const borderWidth  = parseFloat(style.borderTopWidth);
+    const borderRadius = parseFloat(style.borderTopLeftRadius);
+
+    // Draw background with border radius
+    ctx.fillStyle = style.backgroundColor;
+    ctx.beginPath();
+        ctx.moveTo(left + borderRadius,         top);
+        ctx.lineTo(left + width - borderRadius, top);
+        ctx.quadraticCurveTo(left + width,      top, left + width, top + borderRadius);
+        ctx.lineTo(left + width,                top + height - borderRadius);
+        ctx.quadraticCurveTo(left + width,      top + height, left + width - borderRadius, top + height);
+        ctx.lineTo(left + borderRadius,         top + height);
+        ctx.quadraticCurveTo(left,              top + height, left, top + height - borderRadius);
+        ctx.lineTo(left,                        top + borderRadius);
+        ctx.quadraticCurveTo(left, top,         left + borderRadius, top);
+    ctx.closePath();
+    ctx.fill();
+
+    // Draw border
+    if (borderWidth > 0)
+    {
+        ctx.strokeStyle = style.borderColor;
+        ctx.lineWidth   = borderWidth;
+        ctx.stroke();
+    }
+
+    // Draw text
+    ctx.fillStyle    = style.color;
+    ctx.font         = `${style.fontSize} ${style.fontFamily}`;
+    ctx.textBaseline = 'top';
+    ctx.fillText(div.textContent.trim(), left + paddingLeft + borderWidth, top + paddingTop + borderWidth + 2);
+}
+
+
+$('save-still-btn').onclick = () => {
+    var canvas = document.createElement("canvas");
+
+    canvas.width  = view.width;
+    canvas.height = view.height;
+
+    document.body.appendChild(canvas);
+
+    var context = canvas.getContext('2d');
+
+    context.drawImage(view, 0, 0, canvas.width, canvas.height);
+
+    context.globalAlpha = $('opacity-slider').value / 100;
+        context.drawImage(viewOverlay, 0, 0, canvas.width, canvas.height);
+    context.globalAlpha = 1.0;
+
+    drawDivToCanvas('tooltipMin', canvas);
+    drawDivToCanvas('tooltipMax', canvas);
+
+    try {
+        var dataURL = canvas.toDataURL('image/png');
+
+        const link = document.createElement('a');
+        link.href = dataURL;
+
+        var d = new Date();
+        link.download = d.getFullYear() + "-" +
+                                      ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+                                      ("0" + d.getDate()).slice(-2) + "_" +
+                                      ("0" + d.getHours()).slice(-2) + "h" +
+                                      ("0" + d.getMinutes()).slice(-2) + "m" +
+                                      ("0" + d.getSeconds()).slice(-2) + "s.png";
+
+        document.body.appendChild(link);
+            link.click();
+        document.body.removeChild(link);
+    }
+    catch (e) {
+        console.error(e);
+    }
+    canvas.parentNode.removeChild(canvas);
+}
+
+function formatFloat32Array(arr, cols = 32, rows = 24)
+{
+    if (arr.length !== cols * rows) {
+        throw new Error(`Array length must be ${cols * rows}, got ${arr.length}`);
+    }
+
+    let result = '';
+    for (let r = 0; r < rows; r++)
+    {
+        let rowStr = '';
+        for (let c = 0; c < cols; c++)
+        {
+            let value = arr[r * cols + c];
+            
+            // Format to 6.2
+            rowStr += value.toFixed(2) + "\t";
+        }
+        result += rowStr + '\n';
+    }
+    return result;
+}
+
+
+
+$('save-data-btn').onclick = () => {
+
+    let emiss   = parseFloat($('emissivity').value);
+    let ambRefl = parseFloat($('ambReflected').value);
+
+    var strArray = "\"Emissivity\": " + emiss.toFixed(2) + "\n" +
+                   "\"AmbientReflection\": " + ambRefl.toFixed(2) + "\n" +
+                   formatFloat32Array(g_floats);
+
+    const blob = new Blob([strArray], { type: 'text/plain' });
+
+    try {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+
+        var d = new Date();
+        link.download = d.getFullYear() + "-" +
+                                        ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+                                        ("0" + d.getDate()).slice(-2) + "_" +
+                                        ("0" + d.getHours()).slice(-2) + "h" +
+                                        ("0" + d.getMinutes()).slice(-2) + "m" +
+                                        ("0" + d.getSeconds()).slice(-2) + "s_values.txt";
+
+        document.body.appendChild(link);
+            link.click();                   // Trigger download
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(link.href);     // Clean up memory
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+</script>
+        <script>
+
+const startCalibration = async () => {
+
+    alert("Aim the device on uniformly heated surface\nCalibration is done against ambient reflected temperature");
+
+    let ambRefl = parseFloat($('ambReflected').value);
+
+    const response = await fetch(`${baseHost}/mlx?var=calibrate&val=${ambRefl}`, {
+                                    headers: {
+                                        "X-Client-Date": new Date().toString().split(' GMT')[0]  // e.g. "Wed, 20 Aug 2025 02:45:32"
+                                    }
+                                });
+
+    if (!response.ok)   throw new Error("HTTP error " + response.status);
+    if (!response.body) throw new Error("ReadableStream not supported");
+
+    // get ReadableStreamDefaultReader
+    const reader = response.body.getReader();
+
+    while (true) {
+        // "value" is Uint8Array holding received chunk of data,
+        // "done"  is boolean turining into true when stream is finished
+        const { value, done } = await reader.read();
+        if (done) break;
+        if (!value) continue;
+
+        for (let i = 0; i < value.length; i++) {
+            $('calibration-progress').value = value[i];
+        }
+    }
+
+    $('toggle-calibrate-btn').innerHTML = 'Calibrate';
+    $('toggle-calibrate-btn').style.background = '#00AA00';
+    $('toggle-calibrate-btn').disabled = true;
+    $('calibration_date').value = "just recently";
+}
+
+
+// Attach actions to buttons
+
+$('toggle-calibrate-btn').onclick = () => {
+
+    if (!confirm("Are you sure you want to start calibration?\nThat will erase previous calibration data"))
+        return;
+
+    const streamInProgress = $('toggle-stream-btn').innerHTML === 'Stop Stream';
+    if (!streamInProgress) {
+        alert("Streaming has to be started first");
+        return;
+    }
+
+    $('toggle-calibrate-btn').innerHTML = '...';
+    $('toggle-calibrate-btn').style.background = '#ff3034';
+    $('toggle-calibrate-btn').disabled = true;
+
+    startCalibration();
+}
+
+
+
+$('toggle-calibrate-save-btn').onclick = async () => {
+
+    const response = await fetch(`${baseHost}/get_offsets90640`);
+
+    if (!response.ok) throw new Error("HTTP error " + response.status);
+
+    const bodyBytes = await response.arrayBuffer(); // wait for full body
+
+    if (bodyBytes.byteLength != 32*24*4)
+    {
+        console.log("The number of offsets is different from 768");
+        return;
+    }
+
+    // Reinterpret as Float32Array
+    const floats = new Float32Array(bodyBytes);
+
+    var strArray = formatFloat32Array(floats);
+
+    const blob = new Blob([strArray], { type: 'text/plain' });
+
+    try {
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+
+        var d = new Date();
+        link.download = d.getFullYear() + "-" +
+                                        ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+                                        ("0" + d.getDate()).slice(-2) + "_" +
+                                        ("0" + d.getHours()).slice(-2) + "h" +
+                                        ("0" + d.getMinutes()).slice(-2) + "m" +
+                                        ("0" + d.getSeconds()).slice(-2) + "s_offsets.txt";
+
+        document.body.appendChild(link);
+        link.click();                   // Trigger download
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(link.href);     // Clean up memory
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+
+
+$('toggle-calibrate-default-btn').onclick = async () => {
+
+    if ( !confirm("Are you sure you want to reset to default calibration profile?") ) return;
+
+    try {
+        const response = await fetch(`${baseHost}/mlx?var=reset&val=1`);
+        
+        if (!response.ok) throw new Error("Reseting to default profile failed");
+
+        const text = await response.text();
+
+        alert("Server says: " + text);
+
+        $('calibration_date').value = "A few moments ago"
+
+    }
+    catch (err) {
+        alert("Error: " + err.message);
+    }
+}
+
+
+$('upload-calibration-btn').onclick = async () => {
+
+    let fileInput = $("calibration-fileInput");
+
+    // Check if any file is selected
+    if (!fileInput.files || fileInput.files.length === 0) {
+        alert("No file selected");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    if (file.size === 0) {
+        alert("File is empty");
+        return;
+    }
+
+    if ( !confirm("Are you sure you want to update calibration profile?") ) return;
+
+
+    const reader = new FileReader();
+
+    reader.onload = async function(e) {
+        const text = e.target.result;
+
+        // Parse numbers from file text
+        const numbers = text
+            .split(/[\s,]+/)         // split on spaces, commas, tabs, newlines
+            .filter(s => s.length)   // remove empty strings
+            .map(Number);            // convert to floats
+
+        // Convert floats to raw binary
+        const floatArray = new Float32Array(numbers);
+        const byteArray  = new Uint8Array(floatArray.buffer);
+
+        try {
+            const response = await fetch(`${baseHost}/set_offsets90640`, {
+                method: "POST",
+                headers: {
+                    "X-Client-Date": new Date().toString().split(' GMT')[0]  // e.g. "Wed, 20 Aug 2025 02:45:32"
+                },
+                body: byteArray
+            });
+            if (!response.ok) throw new Error("Upload failed");
+
+            const text = await response.text();
+
+            alert("Server says: " + text);
+
+            $('calibration_date').value = "A few moments ago"
+
+        }
+        catch (err) {
+            alert("Error: " + err.message);
+        }
+    }
+
+    reader.onerror = function(e) {
+        console.error("Error reading file:", e);
+    };
+
+    reader.readAsText(file);
+
+}
+
+</script>
+
+    </body>
+</html>
+)"
